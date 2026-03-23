@@ -1,0 +1,72 @@
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+  color: #333;
+}
+
+.todo-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background: #f9f9f9;
+}
+
+.todo-item ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.check-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #0d6efd;
+  border-radius: 0.5rem;
+  background: white;
+  color: #0d6efd;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-weight: 500;
+}
+
+.check-button input {
+  appearance: none;
+  width: 1.3em;
+  height: 1.3em;
+  border: 2px solid currentColor;
+  border-radius: 0.35rem;
+  margin: 0;
+  display: grid;
+  place-content: center;
+}
+
+.check-button input::before {
+  content: "✔";
+  color: white;
+  font-size: 0.9em;
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.check-button input:checked {
+  background: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.check-button input:checked::before {
+  transform: scale(1);
+}
+
+.check-button:has(input:checked) {
+  background: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.check-button:hover {
+  background: #e7f1ff;
+}

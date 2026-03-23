@@ -18,7 +18,8 @@ export default class Todo {
         <p>Priority: ${this.priority}</p>
         <p>Notes: ${this.notes}</p>
         <ul>
-          ${this.checklist.map((item) => `<li>${item}</li>`).join("")}
+          ${this.checklist.map((item) => `<li><label class="check-button">
+            <input type="checkbox"><span>${item}</span></label></li>`).join("")}
         </ul>
       </div>
     `;

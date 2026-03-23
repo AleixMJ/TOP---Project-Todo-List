@@ -11,4 +11,8 @@ const todoDefault = new Todo(
 );
 
 const todoContainer = document.querySelector(".todo-container");
-todoContainer.innerHTML = todoDefault.Display();
+const todoTask = document.createElement("div");
+todoTask.classList.add("todo-item");
+todoTask.innerHTML = todoDefault.Display();
+todoContainer.appendChild(todoTask);
+

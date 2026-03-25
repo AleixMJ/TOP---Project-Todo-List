@@ -1,5 +1,5 @@
 export default class Todo {
-  constructor(title, description, dueDate, priority, notes, checklist) {
+  constructor(title, description, dueDate, priority, notes, checklist = []) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -7,28 +7,24 @@ export default class Todo {
     this.notes = notes;
     this.checklist = checklist;
     this.completed = false;
-    this.expanded = false;
+
   }
 
-    toggleExpanded() {
-    this.expanded = !this.expanded;
-    }
 
     Display() {
-    const isExpanded = this.expanded;
-    const expandSymbol = isExpanded ? '-' : '+';
+
     return `
       <div class="todo-item">
         <div class="todo-header">
             <h2>${this.title}</h2>
             <div class="todo-actions">
-                <button class="toggle-button">${expandSymbol}</button>
-                <button class="edit-button">Edit</button>
-                <button class="delete-button">X</button>
+                <button class="expand-btn">+</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">X</button>
             </div> 
         </div>  
 
-        <div class="todo-content" ${isExpanded ? '' : 'hidden'}>
+        <div class="todo-content" style="display: none;">
           ${this.description ? `<p>${this.description}</p>` : ''}
           <p><strong>Due:</strong> ${this.dueDate || '—'}</p>
           <p><strong>Priority:</strong> ${this.priority || 'Medium'}</p>

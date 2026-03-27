@@ -10,24 +10,52 @@ nav {
 }
 
 #newTask-creation {
-  padding: 10px 0;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  max-width: 100%;
+  width:380px;
+
 }
 
 #newTask-form {
-  display: flex;
-  flex-direction: column;
-  margin-left: 30px;
-  margin-right: 30px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 #newTask-form div {
   padding: 5px 0;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+#newTask-form label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+#newTask-form input,
+#newTask-form textarea,
+#newTask-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+
 }
 
 #newTask-form button {
 align-self: center;
-width: 50%;
+width: 100%;
+max-width: 200px;
 padding: 10px;
 border: none;
 border-radius: 5px;

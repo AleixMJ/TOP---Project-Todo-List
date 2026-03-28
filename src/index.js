@@ -56,10 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const newTaskDialog = document.getElementById("newTask-creation");
   const newTaskBtn = document.getElementById("newTask-btn");
   const newTaskForm = document.getElementById("newTask-form");
+  const closeDialogBtn = document.querySelector(".closeTask-btn");
+
+  closeDialogBtn.addEventListener('click', () => {
+    newTaskDialog.close();
+  });
+
+
 
   newTaskBtn.addEventListener('click', () => {
     newTaskDialog.showModal();
   });
+
+
 
   newTaskForm.addEventListener('submit',(e) => {
     e.preventDefault();

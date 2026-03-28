@@ -1,3 +1,8 @@
+:root {
+  --btn-color:#0d6efd;
+}
+
+
 body {
   text-align: center;
 }
@@ -15,7 +20,9 @@ nav {
   border: 1px solid #ddd;
   background: #f9f9f9;
   max-width: 100%;
-  width:380px;
+  width:330px;
+  box-sizing: border-box;
+  position: relative;
 
 }
 
@@ -59,10 +66,31 @@ max-width: 200px;
 padding: 10px;
 border: none;
 border-radius: 5px;
-background-color: #0d6efd;
+background-color: var(--btn-color);
 color: white;
 margin-top: 10px;
 }
+
+#newTask-form button.closeTask-btn {
+  position: absolute;
+  top: 8px; 
+  right: 8px;  
+  
+
+  width: 20px;
+  height: 20px;
+  max-width: 20px;
+  
+  padding: 0;
+  margin: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  line-height: 1;
+  font-size: 12px;
+}
+
 h1 {
   text-align: center;
   margin-top: 2rem;
@@ -70,7 +98,7 @@ h1 {
 }
 
 .todo-container {
-  max-width: 600px;
+  max-width: 350px;
   margin: 2rem auto;
   padding: 1rem;
   border: 1px solid #ddd;
@@ -89,7 +117,7 @@ h1 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  border: 2px solid #0d6efd;
+  border: 2px solid var(--btn-color);
   border-radius: 0.5rem;
   background: white;
   color: #0d6efd;
@@ -109,6 +137,8 @@ h1 {
   place-content: center;
 }
 
+
+
 .check-button input::before {
   content: "✔";
   color: white;
@@ -118,8 +148,8 @@ h1 {
 }
 
 .check-button input:checked {
-  background: #0d6efd;
-  border-color: #0d6efd;
+  background: var(--btn-color);
+  border-color: var(--btn-color);
 }
 
 .check-button input:checked::before {
@@ -127,9 +157,9 @@ h1 {
 }
 
 .check-button:has(input:checked) {
-  background: #0d6efd;
+  background: var(--btn-color);
   color: white;
-  border-color: #0d6efd;
+  border-color: var(--btn-color);
 }
 
 .check-button:hover {
@@ -154,7 +184,7 @@ h1 {
     padding: 0.2rem 0.5rem;
     border: none;
     border-radius: 0.3rem;
-    background: #0d6efd;
+    background: var(--btn-color);
     color: white;
     cursor: pointer;
     font-size: 0.7rem;

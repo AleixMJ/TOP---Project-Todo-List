@@ -14,6 +14,13 @@ nav {
   border-bottom: 1px solid gold;
 }
 
+#container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 350px;
+  margin: 2rem 0 10px 1rem;
+}
 #newTask-creation {
   padding: 10px 30px;
   border-radius: 10px;

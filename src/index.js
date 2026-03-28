@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let todos = [];
+    let currentEditId = null;
 
     function renderTodos() {
       todoContainer.innerHTML = "";     
@@ -49,6 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
         todoItem.remove();
       }
 
+      if (e.target.classList.contains('edit-btn')) {
+        currentEditId = todoItem.dataset.id;
+        const currentEditTodo = todos.find(todo => todo.id === currentEditId)
+        Array.from(newTaskForm.elements).forEach(input => {
+          if (input.name && currentEditTodo[input.name]) {
+            input.value = currentEditTodo[input.name];
+          }
+
+        });
+        document.getElementById("submitTask").textContent = "Update task";
+        newTaskDialog.showModal();
+      }
+
     });
 
 
@@ -65,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   newTaskBtn.addEventListener('click', () => {
+    document.getElementById("submitTask").textContent = "Create new task";
     newTaskDialog.showModal();
   });
 
@@ -73,22 +88,46 @@ document.addEventListener('DOMContentLoaded', () => {
   newTaskForm.addEventListener('submit',(e) => {
     e.preventDefault();
 
-    const task = Object.fromEntries(new FormData(newTaskForm));
-    console.log("new task:", task);
-    const newTodo = new Todo(
-      task['task-title'],
-      task['task-description'],
-      task['task-dueDate'],
-      task['task-priority'],
-      task['task-notes'],
-      task['task-checklist'] ? task['task-checklist'].split(',').map(item => item.trim()) : []
-    );
+    console.log("checking currentEditId",currentEditId);
+    
+    if (currentEditId) {
+      console.log("editing mode");
+      
+      const currentEditTodo = todos.find(todo => todo.id === currentEditId)
+      console.log(currentEditTodo);
+        Array.from(newTaskForm.elements).forEach(input => {
+          if (input.name === "checklist") {
+            currentEditTodo['checklist'] = 
+            input.value ? input.value.split(',').map(item => item.trim()) : []
+          } else {
+            if (input.name && currentEditTodo[input.name]) {
+            currentEditTodo[input.name] = input.value;
+          }
 
-    todos.push(newTodo);
+          }      
+
+
+        });
+      currentEditId = null;       
+    } else {
+
+      const task = Object.fromEntries(new FormData(newTaskForm));
+      console.log("new task:", task);
+      const newTodo = new Todo(
+        task['title'],
+        task['description'],
+        task['dueDate'],
+        task['priority'],
+        task['notes'],
+        task['checklist'] ? task['checklist'].split(',').map(item => item.trim()) : []
+      );
+
+      todos.push(newTodo);
+
+    }
     renderTodos();
     newTaskForm.reset();
     newTaskDialog.close();
-
   });
 
   // Initial render of Todos with example

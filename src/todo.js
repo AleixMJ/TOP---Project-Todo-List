@@ -7,6 +7,7 @@ export default class Todo {
     this.notes = notes;
     this.checklist = checklist;
     this.completed = false;
+    this.id = crypto.randomUUID();
 
   }
 
@@ -14,7 +15,7 @@ export default class Todo {
     Display() {
 
     return `
-      <div class="todo-item">
+      <div class="todo-item" data-id="${this.id}">
         <div class="todo-header">
             <h2>${this.title}</h2>
             <div class="todo-actions">

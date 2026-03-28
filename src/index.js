@@ -13,13 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    let todos = [];
+    let projects = []
     let currentEditId = null;
+    let currentProject = null;
 
-    function renderTodos() {
+    function renderTodos(project) {
       todoContainer.innerHTML = "";     
 
-      todos.forEach(todo => {
+      project["todos"].forEach(todo => {
         todoContainer.insertAdjacentHTML('beforeend', todo.Display());
       });
     }
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (e.target.classList.contains('edit-btn')) {
         currentEditId = todoItem.dataset.id;
-        const currentEditTodo = todos.find(todo => todo.id === currentEditId)
+        const currentEditTodo = currentProject.todos.find(todo => todo.id === currentEditId)
         Array.from(newTaskForm.elements).forEach(input => {
           if (input.name && currentEditTodo[input.name]) {
             input.value = currentEditTodo[input.name];
@@ -84,16 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-
+  // Submit handler
   newTaskForm.addEventListener('submit',(e) => {
     e.preventDefault();
-
-    console.log("checking currentEditId",currentEditId);
-    
+   
     if (currentEditId) {
-      console.log("editing mode");
       
-      const currentEditTodo = todos.find(todo => todo.id === currentEditId)
+      const currentEditTodo = currentProject.todos.find(todo => todo.id === currentEditId)
       console.log(currentEditTodo);
         Array.from(newTaskForm.elements).forEach(input => {
           if (input.name === "checklist") {
@@ -122,16 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
         task['checklist'] ? task['checklist'].split(',').map(item => item.trim()) : []
       );
 
-      todos.push(newTodo);
+      currentProject.todos.push(newTodo);
 
     }
-    renderTodos();
+    renderTodos(currentProject);
     newTaskForm.reset();
     newTaskDialog.close();
   });
 
   // Initial render of Todos with example
-  todos = [
+  let todos = [
     new Todo(
       "Example Todo",
       "This is an example todo item.",
@@ -141,6 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ["Task 1", "Task 2", "Task 3"]
     )
   ];
-  renderTodos();
+  projects.push({ name: "Todo List", todos: todos });
+  currentProject = projects[0];
+  renderTodos(currentProject);
 });
 

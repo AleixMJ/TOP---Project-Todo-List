@@ -2,6 +2,7 @@ import Todo from "./todo";
 import "./styles.css";
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Buttons functionality inside each form
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-
+    
 
     // Event delegation for todo item buttons
     todoContainer.addEventListener('click', function(e) {
@@ -85,6 +86,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  // Projects button logic
+  const projectsBtn = document.getElementById("projects-btn");
+  const containerProjects = document.getElementById("container-projects");
+  projectsBtn.addEventListener('click', () => {
+    containerProjects.style.left = "0";
+  });
+
+  function renderProjects() {
+    projects.forEach(project => {
+      let projectName = document.createElement("p");
+      projectName.textContent = project["name"];
+      projectName.addEventListener('click', () => {
+        containerProjects.style.left = "-200px";
+        currentProject = project;
+        renderTodos(currentProject);
+      })
+      containerProjects.appendChild(projectName);
+    });
+  };
+
   // Submit handler
   newTaskForm.addEventListener('submit',(e) => {
     e.preventDefault();
@@ -142,5 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
   projects.push({ name: "Todo List", todos: todos });
   currentProject = projects[0];
   renderTodos(currentProject);
+  renderProjects();
 });
 

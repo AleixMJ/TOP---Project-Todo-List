@@ -227,14 +227,35 @@ h2 {
   background-color: #b6dff8;
 }
 
-#newProject-creation {
-  align-self: center;
-  width: 100%;
-  max-width: 160px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--btn-color);
-  color: white;
-  margin-top: 10px;
+.hidden {
+    display: none !important;
+}
+
+#new-project-wrapper {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#new-project-name {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid var(--btn-color);
+    border-radius: 4px;
+}
+
+.input-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.input-actions button {
+    flex: 1;
+    font-size: 12px;
+    padding: 4px;
 }

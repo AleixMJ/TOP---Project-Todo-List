@@ -1,5 +1,6 @@
 import Todo from "./todo";
 import "./styles.css";
+import initProjectsSidebar from "./ProjectsSidebar";
 
 
 
@@ -94,13 +95,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function renderProjects() {
+    const existingLinks = containerProjects.querySelectorAll('.project-link');
+    existingLinks.forEach(link => link.remove());
+
+
     projects.forEach(project => {
       let projectName = document.createElement("p");
       projectName.textContent = project["name"];
+      projectName.classList.add("project-link");
       projectName.addEventListener('click', () => {
         containerProjects.style.left = "-200px";
         currentProject = project;
         renderTodos(currentProject);
+        document.getElementById("project-name").textContent = project.name;
       })
       containerProjects.appendChild(projectName);
     });
@@ -164,5 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
   currentProject = projects[0];
   renderTodos(currentProject);
   renderProjects();
+
+  initProjectsSidebar(projects,renderProjects);
 });
 

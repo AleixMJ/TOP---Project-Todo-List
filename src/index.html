@@ -54,7 +54,7 @@
 
     </dialog>
     <div id="container-header">
-        <div id="project-display">
+        <div id="projects-display">
             <button id="projects-btn">Projects</button>    
             <h2 id="project-name">Todo List</h2>        
         </div>
@@ -66,7 +66,18 @@
     <div class="todo-container"></div>
     <div id="container-projects">
         <div>
-            <button id="newProject-creation">Create New Project</button>
+            <div id="new-project-wrapper">
+                <button id="show-input-btn">+ New Project</button>
+
+                    <div id="input-section" class="hidden">
+                        <input type="text" id="new-project-name" placeholder="Project name...">
+                        <div class="input-actions">
+                            <button id="add-project-confirm">Add</button>
+                            <button id="cancel-project-btn">X</button>
+                        </div>
+                    </div>
+                </div>
+            
         </div>
 
     </div>

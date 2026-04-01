@@ -3,6 +3,7 @@ export default function initProjectsSidebar(projects, renderProjectsCallback) {
     const inputSection = document.getElementById('input-section');
     const addBtn = document.getElementById('add-project-confirm');
     const projectNameInput = document.getElementById('new-project-name');
+    const cancelBtn = document.getElementById('cancel-project-btn');
 
     showInputBtn.addEventListener('click', () => {
         showInputBtn.classList.add('hidden');
@@ -20,5 +21,14 @@ export default function initProjectsSidebar(projects, renderProjectsCallback) {
             showInputBtn.classList.remove('hidden');
             inputSection.classList.add('hidden');
         }
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        if (projectNameInput) {
+            projectNameInput.value = "";
+        }
+            
+            showInputBtn.classList.remove('hidden');
+            inputSection.classList.add('hidden');
     });
 }

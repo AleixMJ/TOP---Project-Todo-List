@@ -1,5 +1,6 @@
 import Todo from "./todo";
 import "./styles.css";
+import './sidebar.css';
 import initProjectsSidebar from "./ProjectsSidebar";
 
 

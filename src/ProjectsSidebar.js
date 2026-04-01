@@ -1,3 +1,5 @@
+import './sidebar.css';
+
 export default function initProjectsSidebar(projects, renderProjectsCallback) {
     const showInputBtn = document.getElementById('show-input-btn');
     const inputSection = document.getElementById('input-section');

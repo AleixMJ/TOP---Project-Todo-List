@@ -6,9 +6,17 @@
     <title>Todo List</title>
 </head>
 <body>
-    <nav>
-       <div>All Tasks</div>       
-    </nav>
+<header class="app-header">
+    <div class="top-row">
+        <button id="projects-btn">☰</button>
+        <div id="app-logo">Taskly</div>
+        <div></div> </div>
+    
+    <div class="project-info">
+        <h1 id="project-name">Todo List</h1>
+        <button id="newTask-btn">Task +</button>
+    </div>
+</header>
 
     <dialog id="newTask-creation">
         <form id="newTask-form">
@@ -53,15 +61,6 @@
             
 
     </dialog>
-    <div id="container-header">
-        <div id="projects-display">
-            <button id="projects-btn">Projects</button>    
-            <h2 id="project-name">Todo List</h2>        
-        </div>
-        
-        <div><button id="newTask-btn">Task+</button></div>
-
-    </div>
     
     <div class="todo-container"></div>
     <div id="container-projects">

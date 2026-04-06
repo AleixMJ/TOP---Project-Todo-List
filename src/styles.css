@@ -1,150 +1,139 @@
-/* --- 1. MOBILE STYLES (Default) --- */
+/* --- 1. VARIABLES & RESET --- */
 :root {
-  /* Main UI Colors */
   --primary-blue: #0d6efd;
   --bg-main: #ffffff;
-  --text-main: #2c3e50; /* Softer than pure black */
+  --text-main: #2c3e50; 
   
-  /* Neutral Button Style (Muted) */
-  --btn-bg: rgba(0, 0, 0, 0.06); 
-  --btn-text: #555;
+  --btn-bg-muted: rgba(0, 0, 0, 0.04); 
+  --btn-text-muted: #777;
   --btn-hover: #444;
 
-  /* Refined Priority Backgrounds */
-  --urgent-bg: #fff0f0;
-  --high-bg: #fff9f0;
-  --medium-bg: #f0f7ff;
-  --low-bg: #f8f9fa; /* Greyish/White as requested */
-  
-  /* Priority Accents (Borders/Icons) */
-  --urgent-accent: #c62828;
+  /* Priority Accents */
+  --urgent-accent: #d32f2f;
   --high-accent: #ef6c00;
   --medium-accent: #0277bd;
   --low-accent: #adb5bd;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+}
 
 body {
-  text-align: center;
+    background-color: #fcfcfc;
+    color: var(--text-main);
+    text-align: center;
 }
 
-nav {
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  padding: 10px 0;
-  border-bottom: 1px solid gold;
+/* --- 2. TODO LIST CONTAINER --- */
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Slightly more breathing room */
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
 }
 
-#projects-display {
-  display: flex; 
-  flex-direction: row; 
-  align-items: center; 
-  gap: 12px;   
+/* --- 3. TODO ITEM (THE "TASKLY" CARD) --- */
+.todo-item {
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border-left: 6px solid var(--low-accent);
+    transition: transform 0.1s ease;
 }
 
+/* Priority Strips */
+.todo-item.priority-Urgent { border-left-color: var(--urgent-accent); }
+.todo-item.priority-High   { border-left-color: var(--high-accent); }
+.todo-item.priority-Medium { border-left-color: var(--medium-accent); }
+.todo-item.priority-Low    { border-left-color: var(--low-accent); }
 
-#project-name {
-  margin: 0;    
-  padding: 0;
-  display: inline;
-  font-size: 1.2rem;
-  text-align: left;
+.todo-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-#container-header {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
-  width: 90%;   
-  margin: 1.5rem auto;
+.todo-status {
+    display: flex;
+    justify-content: flex-end; /* Pushes date/checkbox to the right */
+    align-items: center;
+    gap: 10px;
 }
 
-#newTask-creation {
-  padding: 10px 30px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  background: #f9f9f9;
-  max-width: 100%;
-  width:330px;
-  box-sizing: border-box;
-  position: relative;
-
+.time-left {
+    font-size: 0.75rem;
+    color: #999;
 }
 
-#newTask-form {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 10px;
-    box-sizing: border-box;
+.todo-main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#newTask-form div {
-  padding: 5px 0;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
+.todo-main-content h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #34495e;
+    text-align: left;
 }
 
-#newTask-form label {
-    margin-bottom: 6px;
+/* --- 4. GHOST ACTION BUTTONS --- */
+.todo-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.todo-actions button {
+    background: none;
+    color: var(--btn-text-muted);
+    border: none;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: #333;
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
-#newTask-form input,
-#newTask-form textarea,
-#newTask-form select {
+.todo-actions button:hover {
+    color: var(--text-main);
+}
+
+.todo-actions button:active {
+    color: var(--primary-blue);
+}
+
+/* --- 5. DIALOG & FORMS --- */
+#newTask-creation {
+    padding: 25px;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    width: 350px;
+    margin: auto;
+}
+
+#newTask-form button#submitTask {
     width: 100%;
-    box-sizing: border-box;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-blue);
+    color: white;
+    font-weight: 700;
+    margin-top: 20px;
 }
 
-#newTask-form button {
-align-self: center;
-width: 100%;
-max-width: 200px;
-padding: 10px;
-border: none;
-border-radius: 5px;
-background-color: var(--primary-blue);
-color: white;
-margin-top: 10px;
-}
-
-#newTask-form button.closeTask-btn {
-  position: absolute;
-  top: 8px; 
-  right: 8px;  
-  
-
-  width: 20px;
-  height: 20px;
-  max-width: 20px;
-  
-  padding: 0;
-  margin: 0; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  line-height: 1;
-  font-size: 12px;
-}
-
-h2 {
-  text-align: center;
-  margin-top: 1rem;
-  color: #333;
-}
-
-
-
+/* --- 6. UTILITIES --- */
 .hidden {
     display: none !important;
 }
-

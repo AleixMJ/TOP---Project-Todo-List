@@ -61,22 +61,24 @@
     
     <div class="todo-container"></div>
     <div id="container-projects">
-        <div>
+        <div class="sidebar-header">
+            <div class="sidebar-logo">Taskly</div>
+            
             <div id="new-project-wrapper">
-                <button id="show-input-btn">+ New Project</button>
-
-                    <div id="input-section" class="hidden">
-                        <input type="text" id="new-project-name" placeholder="Project name...">
-                        <div class="input-actions">
-                            <button id="add-project-confirm">Add</button>
-                            <button id="cancel-project-btn">X</button>
-                        </div>
+                <button id="show-input-btn">+ New Project</button> 
+                <div id="input-section" class="hidden">
+                    <input type="text" id="new-project-name" placeholder="Project name...">
+                    <div class="input-actions">
+                        <button id="add-project-confirm">Add</button>
+                        <button id="cancel-project-btn">X</button>
                     </div>
                 </div>
-            
+            </div>
         </div>
 
+        <h3 class="sidebar-title">My Projects</h3>
     </div>
+   
     
 </body>
 </html>

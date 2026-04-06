@@ -145,11 +145,6 @@ body {
     cursor: pointer;
 }
 
-/* --- 6. UTILITIES --- */
-.hidden {
-    display: none;
-}
-
 .primary-btn {
     background-color: var(--primary-blue);
     color: white;
@@ -165,3 +160,4 @@ body {
 .primary-btn:hover {
     background-color: #0b5ed7;
 }
+

@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
       projectName.textContent = project["name"];
       projectName.classList.add("project-link");
       projectName.addEventListener('click', () => {
-        containerProjects.style.left = "-200px";
+        containerProjects.style.left = "-260px";
         currentProject = project;
         renderTodos(currentProject);
         document.getElementById("project-name").textContent = project.name;

@@ -107,23 +107,44 @@
     font-weight: 800;
 }
 
-.project-link {
-    padding: 12px 25px;
-    margin: 2px 12px;
-    border-radius: 10px;
-    color: #2d3748;
+
+.project-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f1f5f9; /* Subtle divider */
+}
+
+.delete-project-btn {
+    background: #f8f9fa;
+    color: var(--btn-text-muted);
+    border: 1px solid #e2e8f0;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
+   
+
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    flex-shrink: 0;
     transition: all 0.2s ease;
-    text-align: left;
 }
 
-.project-link:hover {
-    background-color: #f7fafc;
-    color: #3b82f6;
-    transform: translateX(5px);
+.delete-project-btn:active {
+    background-color: #fee2e2;
+    border-color: #fecaca;
+    color: #ef4444;
 }
-
+.delete-project-btn:hover {
+    background-color: var(--btn-hover);
+    color: white;
+}
 #input-section.hidden, 
 #show-input-btn.hidden {
     display: none;

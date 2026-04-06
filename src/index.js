@@ -4,14 +4,17 @@ import "./sidebar.css";
 import "./dialog.css";
 import "./header.css";
 import initProjectsSidebar from "./ProjectsSidebar";
+import { de } from "date-fns/locale";
 
 // State variables
 let projects = []
 let currentEditId = null;
 let currentProject = null;
+const todoContainer = document.querySelector('.todo-container');
+const containerProjects = document.getElementById("container-projects");
 
 
-// Rebdering functions
+// Rendering functions
 function renderTodos(project, container) {
  container.innerHTML = "";     
 
@@ -21,11 +24,14 @@ function renderTodos(project, container) {
 }
 
 function renderProjects(sidebarProjects, container) {
-  const existingLinks = sidebarProjects.querySelectorAll('.project-link');
-  existingLinks.forEach(link => link.remove());
+  const existingWrappers = sidebarProjects.querySelectorAll('.project-wrapper');
+  existingWrappers.forEach(link => link.remove());
 
 
-  projects.forEach(project => {
+  projects.forEach((project, index) => {
+    const projectWrapper = document.createElement("div");
+    projectWrapper.classList.add("project-wrapper");
+
     let projectName = document.createElement("p");
     projectName.textContent = project["name"];
     projectName.classList.add("project-link");
@@ -34,17 +40,54 @@ function renderProjects(sidebarProjects, container) {
       currentProject = project;
       renderTodos(currentProject, container);
       document.getElementById("project-name").textContent = project.name;
-    })
-    sidebarProjects.appendChild(projectName);
+    });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    deleteBtn.classList.add("delete-project-btn");
+    
+    deleteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      projects.splice(index, 1);
+
+      if (projects.length === 0) {
+        createTemplate(todoContainer);
+      } else {
+        currentProject = projects[0];
+        renderTodos(currentProject, todoContainer);
+        document.getElementById("project-name").textContent = currentProject.name;
+    }
+      renderProjects(containerProjects, todoContainer);
+    });
+    
+
+    projectWrapper.appendChild(projectName);
+    projectWrapper.appendChild(deleteBtn);
+    sidebarProjects.appendChild(projectWrapper);
   });
 };
+
+function createTemplate(container) {
+  let todos = [
+    new Todo(
+      "Example Todo",
+      "This is an example todo item.",
+      "2026-05-31",
+      "High",
+      "These are some notes for the example todo.",
+      ["Task 1", "Task 2", "Task 3"]
+    )
+  ];
+  projects.push({ name: "Todo List", todos: todos });
+  currentProject = projects[0];
+  renderTodos(currentProject, container);
+}
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
 
     // Buttons functionality inside each form
-
-    const todoContainer = document.querySelector('.todo-container');
+    
 
     if (!todoContainer) {
         console.error('Error: .todo-container element not found in the HTML!');
@@ -73,6 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (e.target.classList.contains('delete-btn')) {
+        const todoId = todoItem.dataset.id;
+        currentProject.todos = currentProject.todos.filter(todo => todo.id !== todoId);
         todoItem.remove();
       }
 
@@ -124,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Projects button logic
   const projectsBtn = document.getElementById("projects-btn");
-  const containerProjects = document.getElementById("container-projects");
   projectsBtn.addEventListener('click', () => {
     containerProjects.style.left = "0";
   });
@@ -175,19 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Initial render of Todos with example
-  let todos = [
-    new Todo(
-      "Example Todo",
-      "This is an example todo item.",
-      "2026-05-31",
-      "High",
-      "These are some notes for the example todo.",
-      ["Task 1", "Task 2", "Task 3"]
-    )
-  ];
-  projects.push({ name: "Todo List", todos: todos });
-  currentProject = projects[0];
-  renderTodos(currentProject, todoContainer);
+  createTemplate(todoContainer);
   renderProjects(containerProjects, todoContainer);
 
   initProjectsSidebar(projects, () => renderProjects(containerProjects, todoContainer));

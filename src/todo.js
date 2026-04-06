@@ -18,27 +18,22 @@ export default class Todo {
 
     return `
       <div class="todo-item" data-id="${this.id}">
-        <div class="todo-item" data-id="${this.id}">
-          <div class="todo-header">
-            
-            <div class="todo-status">
-                <p class="time-left">Due in ${this.dueDate ? formatDistanceToNow(new Date(this.dueDate), { addSuffix: true }) : '—'}</p>
-                <label class="complete-button">
-                    <input type="checkbox" ${this.completed ? 'checked' : ''}> 
-                </label>
-            </div>
-
-            <div class="todo-main-content">
-                <h2>${this.title}</h2>
-                <div class="todo-actions">
-                    <button class="expand-btn">+</button>
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">X</button>
-                </div>
-            </div>
-
+        <div class="todo-header">
+          <div class="todo-status">
+              <p class="time-left">Due ${this.dueDate ? formatDistanceToNow(new Date(this.dueDate), { addSuffix: true }) : '—'}</p>
+              <label class="complete-label">
+                  <input class="complete-btn" type="checkbox" ${this.completed ? 'checked' : ''}> 
+              </label>
           </div>
 
+          <div class="todo-main-content">
+              <h2>${this.title}</h2>
+              <div class="todo-actions">
+                  <button class="expand-btn">+</button>
+                  <button class="edit-btn">Edit</button>
+                  <button class="delete-btn">X</button>
+              </div>
+          </div>
         </div>
 
         <div class="todo-content" style="display: none;">

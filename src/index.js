@@ -69,6 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
         newTaskDialog.showModal();
       }
 
+      if (e.target.classList.contains('complete-btn')) {
+        if (e.target.checked) {
+          todoItem.complete = true;
+          todoItem.style.opacity = "0.5";
+          todoItem.style.textDecoration = "line-through";
+        } else {
+          todoItem.complete = false;
+          todoItem.style.opacity = "1";
+          todoItem.style.textDecoration = "none";
+
+        }
+      }
+
     });
 
 

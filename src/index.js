@@ -6,6 +6,7 @@ import "./dialog.css";
 
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Buttons functionality inside each form
@@ -163,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new Todo(
       "Example Todo",
       "This is an example todo item.",
-      "2024-12-31",
+      "2026-05-31",
       "High",
       "These are some notes for the example todo.",
       ["Task 1", "Task 2", "Task 3"]

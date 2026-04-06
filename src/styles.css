@@ -122,82 +122,14 @@ h2 {
   color: #333;
 }
 
-.todo-container {
-  max-width: 350px;
-  margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
-  background: #f9f9f9;
-  text-align: left;
-}
-
-.todo-item ul {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-  display:flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.check-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border: 2px solid var(--btn-color);
-  border-radius: 0.5rem;
-  background: white;
-  color: #0d6efd;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  font-weight: 500;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.check-button input {
-  appearance: none;
-  width: 1.3em;
-  height: 1.3em;
-  border: 2px solid currentColor;
-  border-radius: 0.35rem;
-  margin: 0;
-  display: grid;
-  place-content: center;
-}
 
 
-
-.check-button input::before {
-  content: "✔";
-  color: white;
-  font-size: 0.9em;
-  transform: scale(0);
-  transition: transform 0.15s ease;
-}
-
-.check-button input:checked {
-  background: var(--btn-color);
-  border-color: var(--btn-color);
-}
-
-.check-button input:checked::before {
-  transform: scale(1);
-}
-
-.check-button:has(input:checked) {
-  background: var(--btn-color);
-  color: white;
-  border-color: var(--btn-color);
-}
-
-.check-button:hover {
-  background: #e7f1ff;
+.hidden {
+    display: none !important;
 }
 
 .todo-header {
+    position: relative;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
@@ -205,27 +137,11 @@ h2 {
     padding: 0.5rem 0;
 }
 
-.todo-header h2 {
-  text-align: left;
-  margin: 0;
-}
-.todo-actions {
+.todo-status {
+  position:absolute;
+  right: 0;
+  top: 0;
     display: flex;
+    align-items: flex-end;
     gap: 0.5rem;
-    justify-content: flex-end;
-}
-
-.todo-header button {
-    padding: 0.2rem 0.5rem;
-    border: none;
-    border-radius: 0.3rem;
-    background: var(--btn-color);
-    color: white;
-    cursor: pointer;
-    font-size: 0.7rem;
-    transition: background 0.18s ease;
-} 
-
-.hidden {
-    display: none !important;
 }

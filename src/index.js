@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.checked) {
           todoItem.complete = true;
           todoItem.style.opacity = "0.5";
-          todoItem.style.textDecoration = "line-through";
         } else {
           todoItem.complete = false;
           todoItem.style.opacity = "1";

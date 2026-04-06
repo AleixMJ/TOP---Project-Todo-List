@@ -15,9 +15,9 @@ export default class Todo {
 
 
     Display() {
-
+        
     return `
-      <div class="todo-item" data-id="${this.id}">
+      <div class="todo-item priority-${this.priority.toLowerCase()}" data-id="${this.id}">
         <div class="todo-header">
           <div class="todo-status">
               <p class="time-left">Due ${this.dueDate ? formatDistanceToNow(new Date(this.dueDate), { addSuffix: true }) : '—'}</p>

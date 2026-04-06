@@ -1,6 +1,26 @@
 /* --- 1. MOBILE STYLES (Default) --- */
 :root {
-  --btn-color:#0d6efd;
+  /* Main UI Colors */
+  --primary-blue: #0d6efd;
+  --bg-main: #ffffff;
+  --text-main: #2c3e50; /* Softer than pure black */
+  
+  /* Neutral Button Style (Muted) */
+  --btn-bg: rgba(0, 0, 0, 0.06); 
+  --btn-text: #555;
+  --btn-hover: #444;
+
+  /* Refined Priority Backgrounds */
+  --urgent-bg: #fff0f0;
+  --high-bg: #fff9f0;
+  --medium-bg: #f0f7ff;
+  --low-bg: #f8f9fa; /* Greyish/White as requested */
+  
+  /* Priority Accents (Borders/Icons) */
+  --urgent-accent: #c62828;
+  --high-accent: #ef6c00;
+  --medium-accent: #0277bd;
+  --low-accent: #adb5bd;
 }
 
 
@@ -91,7 +111,7 @@ max-width: 200px;
 padding: 10px;
 border: none;
 border-radius: 5px;
-background-color: var(--btn-color);
+background-color: var(--primary-blue);
 color: white;
 margin-top: 10px;
 }
@@ -128,20 +148,3 @@ h2 {
     display: none !important;
 }
 
-.todo-header {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem 0;
-}
-
-.todo-status {
-  position:absolute;
-  right: 0;
-  top: 0;
-    display: flex;
-    align-items: flex-end;
-    gap: 0.5rem;
-}

@@ -1,15 +1,15 @@
 import { formatDistanceToNow } from 'date-fns';
 
 export default class Todo {
-  constructor(title, description, dueDate, priority, notes, checklist = []) {
+  constructor(title, description, dueDate, priority, notes, checklist = [], id = crypto.randomUUID(), completed = false) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
     this.checklist = checklist;
-    this.completed = false;
-    this.id = crypto.randomUUID();
+    this.completed = completed;
+    this.id = id;
 
   }
 

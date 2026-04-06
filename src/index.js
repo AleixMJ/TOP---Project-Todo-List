@@ -14,6 +14,25 @@ const todoContainer = document.querySelector('.todo-container');
 const containerProjects = document.getElementById("container-projects");
 
 
+// localStorage handling
+function saveToLocalStorage() {
+  localStorage.setItem('taskly_projects', JSON.stringify(projects));
+}
+
+function loadFromLocalStorage() {
+  const savedProjects = localStorage.getItem('taskly_projects');
+  if (savedProjects) {
+    const parsedProjects = JSON.parse(savedProjects)
+    projects = parsedProjects.map(project => {
+      project.todos = project.todos.map(t =>
+        new Todo(t.title, t.description, t.dueDate, t.priority, t.notes, t.checklist, t.id, t.completed)
+      );
+      return project;
+    });
+  } else {
+    createTemplate(todoContainer);
+  }
+}
 // Rendering functions
 function renderTodos(project, container) {
  container.innerHTML = "";     
@@ -57,6 +76,7 @@ function renderProjects(sidebarProjects, container) {
         renderTodos(currentProject, todoContainer);
         document.getElementById("project-name").textContent = currentProject.name;
     }
+      saveToLocalStorage();
       renderProjects(containerProjects, todoContainer);
     });
     
@@ -118,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.classList.contains('delete-btn')) {
         const todoId = todoItem.dataset.id;
         currentProject.todos = currentProject.todos.filter(todo => todo.id !== todoId);
+        saveToLocalStorage();
         todoItem.remove();
       }
 
@@ -213,14 +234,20 @@ document.addEventListener('DOMContentLoaded', () => {
       currentProject.todos.push(newTodo);
 
     }
+    saveToLocalStorage();
     renderTodos(currentProject, todoContainer);
     newTaskForm.reset();
     newTaskDialog.close();
   });
 
   // Initial render of Todos with example
-  createTemplate(todoContainer);
+  loadFromLocalStorage();
+  currentProject = projects[0];
+  renderTodos(currentProject, todoContainer);
   renderProjects(containerProjects, todoContainer);
+  if (currentProject) {
+    document.getElementById("project-name").textContent = currentProject.name;
+  }
 
   initProjectsSidebar(projects, () => renderProjects(containerProjects, todoContainer));
 });

@@ -5,10 +5,41 @@ import "./dialog.css";
 import "./header.css";
 import initProjectsSidebar from "./ProjectsSidebar";
 
+// State variables
+let projects = []
+let currentEditId = null;
+let currentProject = null;
 
 
+// Rebdering functions
+function renderTodos(project, container) {
+ container.innerHTML = "";     
+
+  project["todos"].forEach(todo => {
+    container.insertAdjacentHTML('beforeend', todo.Display());
+  });
+}
+
+function renderProjects(sidebarProjects, container) {
+  const existingLinks = sidebarProjects.querySelectorAll('.project-link');
+  existingLinks.forEach(link => link.remove());
 
 
+  projects.forEach(project => {
+    let projectName = document.createElement("p");
+    projectName.textContent = project["name"];
+    projectName.classList.add("project-link");
+    projectName.addEventListener('click', () => {
+      sidebarProjects.style.left = "-260px";
+      currentProject = project;
+      renderTodos(currentProject, container);
+      document.getElementById("project-name").textContent = project.name;
+    })
+    sidebarProjects.appendChild(projectName);
+  });
+};
+
+// Initialization
 document.addEventListener('DOMContentLoaded', () => {
 
     // Buttons functionality inside each form
@@ -20,20 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    let projects = []
-    let currentEditId = null;
-    let currentProject = null;
-
-    function renderTodos(project) {
-      todoContainer.innerHTML = "";     
-
-      project["todos"].forEach(todo => {
-        todoContainer.insertAdjacentHTML('beforeend', todo.Display());
-      });
-    }
-
-    
-
+  
     // Event delegation for todo item buttons
     todoContainer.addEventListener('click', function(e) {
       // 1. Find if a button inside a todo was clicked
@@ -111,24 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     containerProjects.style.left = "0";
   });
 
-  function renderProjects() {
-    const existingLinks = containerProjects.querySelectorAll('.project-link');
-    existingLinks.forEach(link => link.remove());
 
-
-    projects.forEach(project => {
-      let projectName = document.createElement("p");
-      projectName.textContent = project["name"];
-      projectName.classList.add("project-link");
-      projectName.addEventListener('click', () => {
-        containerProjects.style.left = "-260px";
-        currentProject = project;
-        renderTodos(currentProject);
-        document.getElementById("project-name").textContent = project.name;
-      })
-      containerProjects.appendChild(projectName);
-    });
-  };
 
   // Submit handler
   newTaskForm.addEventListener('submit',(e) => {
@@ -168,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentProject.todos.push(newTodo);
 
     }
-    renderTodos(currentProject);
+    renderTodos(currentProject, todoContainer);
     newTaskForm.reset();
     newTaskDialog.close();
   });
@@ -186,9 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   projects.push({ name: "Todo List", todos: todos });
   currentProject = projects[0];
-  renderTodos(currentProject);
-  renderProjects();
+  renderTodos(currentProject, todoContainer);
+  renderProjects(containerProjects, todoContainer);
 
-  initProjectsSidebar(projects,renderProjects);
+  initProjectsSidebar(projects, () => renderProjects(containerProjects, todoContainer));
 });
 
